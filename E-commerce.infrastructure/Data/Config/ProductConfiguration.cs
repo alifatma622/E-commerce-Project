@@ -20,6 +20,17 @@ namespace Ecommerce.infrastructure.Data.Config
                 .IsRequired();
             builder.Property(c => c.Price)
                 .HasColumnType("Decimal(18,2)");
+            //seed data( inserting initial data ) when the database is created and is empty
+            builder.HasData(
+                new Product
+                {
+                    Id = 1,
+                    Name = "test",
+                    Description = "test",
+                    Price = 100,
+                    CategoryId = 1
+                }
+            );
 
         }
     }
