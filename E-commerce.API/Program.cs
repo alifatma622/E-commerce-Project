@@ -19,8 +19,10 @@ namespace E_commerce.API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "E-commerce API", Version = "v1" });
             });
 
-            // Add infrastructure services
+            // Add infrastructure services (includes AutoMapper configuration)
             builder.Services.InfrastructureConfig(builder.Configuration);
+            // Add AutoMapper
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 

@@ -5,6 +5,8 @@ using Ecommerce.infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+
 
 namespace E_commerce.infrastructure
 {
@@ -13,12 +15,13 @@ namespace E_commerce.infrastructure
         public static IServiceCollection InfrastructureConfig(this IServiceCollection services, IConfiguration configuration)
         {
             // Add your infrastructure services
-            //Register DbContext
+            // Register DbContext
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            //Register Unit of Work
+            // Register Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
 
             return services;
         }
