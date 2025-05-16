@@ -1,4 +1,5 @@
-﻿using E_commerce.Core.Entites.Product;
+﻿using E_commerce.Core.DTO;
+using E_commerce.Core.Entites.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace E_commerce.Core.Interfaces
 {
     public interface IPhotoRepository : IGenericRepository<Photo>
     {
+  
     }
 }

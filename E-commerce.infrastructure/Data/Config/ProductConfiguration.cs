@@ -14,12 +14,9 @@ namespace Ecommerce.infrastructure.Data.Config
         public void Configure(EntityTypeBuilder<Product> builder)
         {
 
-            builder.Property(c => c.Id)
-                  .IsRequired();
-            builder.Property(c => c.Description)
-                .IsRequired();
-            builder.Property(c => c.Price)
-                .HasColumnType("Decimal(18,2)");
+            builder.Property(c => c.Id).IsRequired();
+            builder.Property(c => c.Description).IsRequired();
+            builder.Property(c => c.NewPrice).HasColumnType("Decimal(18,2)");
             //seed data( inserting initial data ) when the database is created and is empty
             builder.HasData(
                 new Product
@@ -27,7 +24,7 @@ namespace Ecommerce.infrastructure.Data.Config
                     Id = 1,
                     Name = "test",
                     Description = "test",
-                    Price = 100,
+                    NewPrice = 100,
                     CategoryId = 1
                 }
             );

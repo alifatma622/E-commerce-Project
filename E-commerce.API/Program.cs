@@ -1,5 +1,6 @@
 using Microsoft.OpenApi.Models;
 using E_commerce.infrastructure;
+using AutoMapper;
 
 namespace E_commerce.API
 {

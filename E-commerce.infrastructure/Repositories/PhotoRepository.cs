@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using E_commerce.Core.DTO;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace E_commerce.infrastructure.Repositories
 {
@@ -16,5 +19,7 @@ namespace E_commerce.infrastructure.Repositories
         {
             _context = context;
         }
+
+     
     }
 }

@@ -35,6 +35,7 @@ namespace E_commerce.API.Controllers
                 {
                     var categoryDTOs = _mapper.Map<IEnumerable<CategoryDTO>>(categories);
                     return Ok(categoryDTOs);
+
                 }
             }
             catch (Exception ex)
