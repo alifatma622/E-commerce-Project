@@ -1,6 +1,7 @@
 using Microsoft.OpenApi.Models;
 using E_commerce.infrastructure;
 using AutoMapper;
+using E_commerce.API.Middlewares;
 
 namespace E_commerce.API
 {
@@ -13,6 +14,7 @@ namespace E_commerce.API
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddMemoryCache();
 
             // Configure Swagger
             builder.Services.AddSwaggerGen(c =>
@@ -34,7 +36,11 @@ namespace E_commerce.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "E-commerce API v1"));
             }
 
+            app.UseMiddleware<ExpectionMiddleware>();
+
             app.UseHttpsRedirection();
+
+            app.UseStatusCodePagesWithRedirects("/Error/{0}"); // Redirect to ErrorController for status codes
 
             app.UseAuthorization();
 
