@@ -11,6 +11,18 @@ namespace E_commerce.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            //cors
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("CORSPolicy", policy =>
+                {
+                    policy.WithOrigins("https://localhost:4200")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials();
+                });
+            });
+
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -29,6 +41,9 @@ namespace E_commerce.API
 
             var app = builder.Build();
 
+       
+
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -36,6 +51,7 @@ namespace E_commerce.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "E-commerce API v1"));
             }
 
+            app.UseCors("CORSPolicy");
             app.UseMiddleware<ExpectionMiddleware>();
 
             app.UseHttpsRedirection();

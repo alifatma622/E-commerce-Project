@@ -88,5 +88,8 @@ namespace E_commerce.infrastructure.Repositories
         {
             return _context.SaveChangesAsync();
         }
+
+        public async Task<int> CounAsync()
+       => await _context.Set<T>().CountAsync();
     }
 }

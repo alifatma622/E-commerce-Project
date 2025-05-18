@@ -21,6 +21,7 @@ namespace E_commerce.Core.Interfaces
         Task UpdateAsync(T entity);
         Task DeleteAsync(int Id);
         Task SaveChangesAsync();
+        Task<int> CounAsync();
 
     }
 }

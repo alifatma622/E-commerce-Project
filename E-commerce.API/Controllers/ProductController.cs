@@ -5,6 +5,7 @@ using E_commerce.Core.Entites.Product;
 using E_commerce.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using E_commerce.Core.Sharing;
 
 namespace E_commerce.API.Controllers
 {
@@ -18,29 +19,27 @@ namespace E_commerce.API.Controllers
 
         //get  
         //first end point   
-        // api/Product/getAll  
+        // api/Product/getAll
+        // //sort="Name"
         [HttpGet("getAll")]
-        public async Task<IActionResult> GetAll()
+        //415 Unsupported Media Type >> wnen send ProductParms parameters >> use [FromQuery]
+
+        public async Task<IActionResult> GetAll([FromQuery] ProductParms parameters)
         {
             try
             {
-                IReadOnlyList<Product>? products = await _unitOfWork.ProductRepository.GetAllAsync(x => x.Category, p => p.Images);
-                if (products == null || !products.Any())
-                {
-                    return Ok(new ResponseAPI(200, "No products found."));
-                }
-                else
-                {
-                    List<ProductDTO>? productDTOs = _mapper.Map<List<ProductDTO>>(products);
 
-                    return Ok(productDTOs);
-                }
+                IEnumerable<ProductDTO>? products = await _unitOfWork.ProductRepository.GetALLAsync(parameters);
+                var  totalcount = await _unitOfWork.ProductRepository.CounAsync();
+                return Ok(new Pagination<ProductDTO>(parameters.PageNumber,parameters.PageSize, totalcount, products));
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseAPI(500, $"Internal server error: {ex.Message}"));
+               
+                return StatusCode(500, "Internal server error");
             }
         }
+
 
         //api/Product/getbyId/{id}
         [HttpGet("getbyId/{id}")]
