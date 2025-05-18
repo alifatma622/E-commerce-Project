@@ -57,13 +57,10 @@ namespace E_commerce.API.Middlewares
             catch (Exception ex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                //when production will make  _hostEnvironment.IsProduction()
                 context.Response.ContentType = "application/json";
-                var errorResponse = new
-                {
-                    StatusCode = (int)HttpStatusCode.InternalServerError,
-                    ex.Message,
-                    ex.StackTrace
-                };
+                var errorResponse = _hostEnvironment.IsDevelopment() ?
+                 new ApiException((int)HttpStatusCode.InternalServerError,ex.Message,ex.StackTrace) : new ApiException((int)HttpStatusCode.InternalServerError, ex.Message);
                 await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
             }
         }
