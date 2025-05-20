@@ -28,7 +28,9 @@ namespace Ecommerce.infrastructure.Data.Config
                 {
                     Id = 1,
                     Name = "test",
-                    Description = "Electronic devices "
+                    Description = "Electronic devices ",
+                    ImgURL = "https://example.com/image1.jpg"
+
                 }
 
             );

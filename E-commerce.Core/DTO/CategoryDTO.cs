@@ -12,6 +12,8 @@ namespace E_commerce.Core.DTO
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        
+        public string ImgURL { get; set; }
 
     }
 }

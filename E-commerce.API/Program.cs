@@ -16,7 +16,7 @@ namespace E_commerce.API
             {
                 options.AddPolicy("CORSPolicy", policy =>
                 {
-                    policy.WithOrigins("https://localhost:4200")
+                    policy.WithOrigins("http://localhost:4200")
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
@@ -31,7 +31,7 @@ namespace E_commerce.API
             // Configure Swagger
             builder.Services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "E-commerce API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "E-commerce API", Version = "v1" });  
             });
 
             // Add infrastructure services (includes AutoMapper configuration)
